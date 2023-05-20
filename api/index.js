@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const User = require('./models/User.js');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const cookieParser = require('cookie-parser');
 const app = express();
 
 //hV3fi39Ah5oEdFVv
@@ -15,6 +16,7 @@ const jwtSecret = ('asWt367328dcvd6252wdsre')
 mongoose.connect(process.env.MONGO_URL)
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(cors({
     credentials: true,
@@ -49,10 +51,15 @@ app.post('/login', async (req, res) => {
     if (userDoc) {
         const passOk = bcrypt.compareSync(password, userDoc.password);
         if (passOk) {
-            jwt.sign({ email: userDoc.email, id: userDoc._id }, jwtSecret, {}, (err, token) => {
-                if (err) throw err;
-                res.cookie('token', token).json(userDoc)
-            })
+            jwt.sign({
+                email: userDoc.email,
+                id: userDoc._id,
+                name: userDoc.name
+            },
+                jwtSecret, {}, (err, token) => {
+                    if (err) throw err;
+                    res.cookie('token', token).json(userDoc)
+                })
         }
         else {
             res.status(422).json('password false');
@@ -63,6 +70,21 @@ app.post('/login', async (req, res) => {
     }
 
 });
+
+
+app.get('/profile', async (req, res) => {
+    const { token } = req.cookies;
+    if (token) {
+        jwt.verify(token, jwtSecret, (err, user) => {
+            if (err) throw err;
+            res.json(user);
+        })
+    }
+    else {
+        res.json(null);
+    }
+
+})
 
 
 
