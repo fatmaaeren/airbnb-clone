@@ -54,7 +54,7 @@ app.post('/login', async (req, res) => {
             jwt.sign({
                 email: userDoc.email,
                 id: userDoc._id,
-                name: userDoc.name
+                // name: userDoc.name
             },
                 jwtSecret, {}, (err, token) => {
                     if (err) throw err;
@@ -75,9 +75,10 @@ app.post('/login', async (req, res) => {
 app.get('/profile', async (req, res) => {
     const { token } = req.cookies;
     if (token) {
-        jwt.verify(token, jwtSecret, (err, user) => {
+        jwt.verify(token, jwtSecret, {}, async (err, userData) => {
             if (err) throw err;
-            res.json(user);
+            const {name, email, _id} = await User.findById(userData.id)
+            res.json({name, email, _id});
         })
     }
     else {
