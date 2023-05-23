@@ -6,6 +6,7 @@ const User = require('./models/User.js');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
+const imageDownloader = require('image-downloader');
 const app = express();
 
 //hV3fi39Ah5oEdFVv
@@ -77,8 +78,8 @@ app.get('/profile', async (req, res) => {
     if (token) {
         jwt.verify(token, jwtSecret, {}, async (err, userData) => {
             if (err) throw err;
-            const {name, email, _id} = await User.findById(userData.id)
-            res.json({name, email, _id});
+            const { name, email, _id } = await User.findById(userData.id)
+            res.json({ name, email, _id });
         })
     }
     else {
@@ -87,10 +88,33 @@ app.get('/profile', async (req, res) => {
 
 })
 
-app.post('/logout', (req,res) => {
+app.post('/logout', (req, res) => {
     res.cookie('token', '').json(true);
-  });
+});
 
+
+// app.post('/upload-by-link', async (req, res) => {
+//     const link = req.body;
+//     const newName = Date.now() + '.jpg';
+
+//     await imageDownloader.image({
+//         url: link,
+//         dest: __dirname + '/uploads/' + newName,
+//     });
+
+//     res.json(__dirname + '/uploads/' + newName);
+// });
+
+
+app.post('/upload-by-link', async (req, res) => {
+    const { link } = req.body;
+    const newName = 'photo' + Date.now() + '.jpg';
+    await imageDownloader.image({
+        url: link,
+        dest: __dirname + '/uploads/' + newName,
+    });
+    res.json(newName);
+});
 
 
 
