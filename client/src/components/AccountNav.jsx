@@ -1,46 +1,21 @@
-import { useContext, useState } from 'react'
-import { UserContext } from '../context/UserContext'
-import { Link, Navigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import PlacesPage from './PlacesPage';
+import { Link, useLocation } from 'react-router-dom';
 
-function AccountPage() {
+function AccountNav() {
 
-    const [redirect, setRedirect] = useState(null);
-
-    const { user, ready, setUser } = useContext(UserContext);
-    let { subpage } = useParams();
-
-    async function logout() {
-        await axios.post('/logout');
-        setRedirect('/');
-        setUser(null);
-    }
-
+    const { pathname } = useLocation();
+    let subpage = pathname.split('/')?.[2];
     if (subpage === undefined) {
         subpage = 'profile';
     }
 
-    if (!ready) {
-        return 'Loading...';
-    }
-
-    if (ready && !user && !redirect) {
-        return <Navigate to={'/login'} />
-    }
-
-    function linkClasses (type=null) {
+    function linkClasses(type = null) {
         let classes = 'inline-flex gap-1 py-2 px-6 rounded-full';
         if (type === subpage) {
-          classes += ' bg-primary text-white';
+            classes += ' bg-primary text-white';
         } else {
-          classes += ' bg-gray-200';
+            classes += ' bg-gray-200';
         }
         return classes;
-      }
-
-    if (redirect) {
-        return <Navigate to={redirect} />
     }
 
     return (
@@ -72,20 +47,8 @@ function AccountPage() {
                     My Acommadations
                 </Link>
             </nav>
-
-
-            {subpage === 'profile' && (
-                <div className='text-center border p-12 mt-12'>
-                    <div>{user.name}({user.email})</div>
-                    <button onClick={logout} className='primary max-w-sm' >Logout</button>
-                </div>
-            )}
-
-            {subpage === 'places' && (
-                <PlacesPage />
-            )}
         </div>
     )
 }
 
-export default AccountPage
+export default AccountNav

@@ -13,6 +13,7 @@ function PhotosUploader({ addedPhotos, onChange }) {
         });
         setPhotoLink('');
     }
+
     function uploadPhoto(e) {
         const files = e.target.files;
         const data = new FormData();
@@ -28,6 +29,17 @@ function PhotosUploader({ addedPhotos, onChange }) {
             });
         })
     }
+
+    function removePhoto(e, filename) {
+        e.preventDefault();
+        onChange([...addedPhotos.filter(photo => photo !== filename)]);
+    }
+
+    function selectAsMainPhoto(e, filename) {
+        e.preventDefault();
+        onChange([filename, ...addedPhotos.filter(photo => photo !== filename)]);
+    }
+
     return (
         <div>
 
@@ -51,8 +63,20 @@ function PhotosUploader({ addedPhotos, onChange }) {
 
                 {addedPhotos.length > 0 && addedPhotos.map(link => (
 
-                    <div key={link}>
+                    <div key={link} className='relative'>
                         <img className='rounded-2xl object-cover min-w-[200px] h-[200px]' src={'http://localhost:4000/uploads/' + link} alt="" />
+                        <button onClick={e => removePhoto(e, link)} className='absolute bg-primary text-white p-1 rounded-md bottom-2 right-2'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.413-.588T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.588 1.413T17 21H7Zm2-4h2V8H9v9Zm4 0h2V8h-2v9Z" /></svg>
+                        </button>
+                        <button onClick={e => selectAsMainPhoto(e, link)} className='absolute bg-yellow-400 text-white p-1 rounded-md bottom-10 right-2'>
+                            {link === addedPhotos[0] && (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V5l-9-4m3.08 15L12 14.15L8.93 16l.81-3.5l-2.71-2.34l3.58-.31L12 6.55l1.39 3.29l3.58.31l-2.71 2.35l.82 3.5Z"></path></svg>
+                            )}
+
+                            {link !== addedPhotos[0] && (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11c0 5.55-3.84 10.74-9 12c-5.16-1.26-9-6.45-9-12V5l9-4l9 4v6m-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m3.05-5l-3.08-1.85L8.9 16l.81-3.5L7 10.16l3.58-.31l1.39-3.3l1.4 3.29l3.58.31l-2.72 2.35l.82 3.5"></path></svg>
+                            )}
+                        </button>
                     </div>
 
                 ))}
