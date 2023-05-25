@@ -1,14 +1,15 @@
 import Image from "./Image.jsx";
 
-function PlaceImg({ place, index = 0, className = null }) {
+function PlaceImg({ place, index = 0 }) {
+    
     if (!place.photos?.length) {
         return '';
     }
-    if (!className) {
-        className = 'object-cover';
-    }
+
+    const className = 'object-cover rounded-2xl w-[200px] h-[200px]';
+
     return (
-        <Image className={className} src={place.photos[index]} alt="" />
+        <Image classname={className} src={place.photos[index]} alt="" />
     );
 }
 

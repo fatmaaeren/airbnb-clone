@@ -12,7 +12,7 @@ function Header() {
             <Link to={'/'} className='logo' >
                 <img src={logo} alt="airbnb" width="120" height="50" />
             </Link>
-            <div className='flex gap-3 border border-grey-300 rounded-full py-2 px-4 shadow-md shadow-gray-200 font-medium text-gray-600'>
+            <div className='flex gap-6 border border-grey-300 rounded-full py-2 px-4 shadow-md shadow-gray-200 font-medium text-gray-600'>
                 <div className='self-center'>Anywhere</div>
                 <div className='border-l border-gray-300' ></div>
                 <div className='self-center'>Any week </div>
