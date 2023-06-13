@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 function Layout() {
     return (
-        <div className='p-8 flex flex-col min-h-screen'>
+        <div className='px-16 py-4  flex flex-col min-h-screen'>
             <Header />
             <Outlet />
         </div>

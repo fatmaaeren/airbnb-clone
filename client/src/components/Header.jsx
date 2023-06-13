@@ -8,11 +8,11 @@ function Header() {
     const {user} = useContext(UserContext)
 
     return (
-        <header className='py-4 flex justify-between'>
+        <header className='py-4 flex justify-between border-b-2'>
             <Link to={'/'} className='logo' >
                 <img src={logo} alt="airbnb" width="120" height="50" />
             </Link>
-            <div className='flex gap-6 border border-grey-300 rounded-full py-2 px-4 shadow-md shadow-gray-200 font-medium text-gray-600'>
+            <div className='flex gap-8 border border-grey-300 rounded-full py-2 px-4 shadow-md shadow-gray-200 font-medium text-sm text-gray-500'>
                 <div className='self-center'>Anywhere</div>
                 <div className='border-l border-gray-300' ></div>
                 <div className='self-center'>Any week </div>
@@ -25,7 +25,7 @@ function Header() {
                 </button>
             </div>
 
-            <Link to={user? '/account' : '/login'} className='flex gap-3 border border-grey-300 rounded-full py-2 px-4 font-medium items-center'>
+            <Link to={user? '/account' : '/login'} className='flex gap-3 border border-grey-300 rounded-full px-4 font-medium items-center'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 self-center">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>

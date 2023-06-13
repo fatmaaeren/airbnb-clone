@@ -22,7 +22,7 @@ export default function IndexPage() {
                             <Image classname={photoClassName} src={place.photos?.[0]} alt="" />
                         )}
                     </div>
-                    <h2 className="font-bold text-gray-700 mb-1">{place.address}</h2>
+                    <h2 className="font-bold text-gray-700 mb-1 line-clamp-1">{place.address}</h2>
                     <h3 className="text-sm text-gray-500 line-clamp-1">{place.title}</h3>
                     <div className="mt-1">
                         <span className="font-bold text-xl">${place.price}</span> per night
