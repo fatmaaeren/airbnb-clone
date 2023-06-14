@@ -7,6 +7,8 @@ local development: In the .env file located in the api directory, assign the mon
 
 ### Owerviev
 ![img1](https://github.com/fatmaaeren/booking-app/assets/124514606/febfe622-22a6-4c9b-9b02-24a3e67f5d3a)
+--------------------------------------------------------------------------------------------------------
+![img2](https://github.com/fatmaaeren/booking-app/assets/124514606/faeb45ba-2e1f-4383-846f-c272b536298a)
 
 ### Getting Started
 
