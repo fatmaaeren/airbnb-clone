@@ -7,7 +7,7 @@ local development: In the .env file located in the api directory, assign the mon
 
 ### Owerviev
 
-![Alt text](/Screenshot_1 1.png "Optional title")
+![My Image](img-1.png)
 
 ### Getting Started
 
