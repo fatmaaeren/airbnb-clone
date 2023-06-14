@@ -8,7 +8,6 @@ local development: In the .env file located in the api directory, assign the mon
 ### Owerviev
 
 
-
 ### Getting Started
 
 This repository is mainly aimed at helping you get started on a MERN stack implementation with a solid file structure. Make a copy of this template repository for your project teams to get started.
