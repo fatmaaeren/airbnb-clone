@@ -14,7 +14,7 @@ function Header() {
             </Link>
             <div className='flex gap-8 border border-grey-300 rounded-full py-2 px-4 shadow-md shadow-gray-200 font-medium text-sm text-gray-500'>
                 <div className='self-center'>Anywhere</div>
-                <div className='border-l border-gray-300' ></div>
+                <div className='border-l border-gray-300'></div>
                 <div className='self-center'>Any week </div>
                 <div className='border-l border-gray-300' ></div>
                 <div className='self-center'>Any quests</div>
